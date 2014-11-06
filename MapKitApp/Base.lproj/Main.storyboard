@@ -7,7 +7,7 @@
         <!--Item 2-->
         <scene sceneID="EWU-dn-19C">
             <objects>
-                <viewController id="Coe-us-SUa" sceneMemberID="viewController">
+                <viewController id="Coe-us-SUa" customClass="DetailViewController" customModule="MapKitApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iY7-el-iBP"/>
                         <viewControllerLayoutGuide type="bottom" id="cYR-28-Xd3"/>
@@ -15,9 +15,32 @@
                     <view key="view" contentMode="scaleToFill" id="jkX-mX-gaD">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="XWz-Dg-hwQ">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CELL" id="pBt-ZK-wEB">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pBt-ZK-wEB" id="dVc-dg-MHd">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="XWz-Dg-hwQ" secondAttribute="trailing" id="BXa-7H-4ga"/>
+                            <constraint firstItem="XWz-Dg-hwQ" firstAttribute="leading" secondItem="jkX-mX-gaD" secondAttribute="leading" id="Suh-Mo-ARI"/>
+                            <constraint firstItem="XWz-Dg-hwQ" firstAttribute="top" secondItem="jkX-mX-gaD" secondAttribute="top" id="y32-Wx-MG5"/>
+                            <constraint firstAttribute="bottom" secondItem="XWz-Dg-hwQ" secondAttribute="bottom" id="yZU-7M-NPg"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 2" id="RsE-dH-DUq"/>
+                    <connections>
+                        <outlet property="tableView" destination="XWz-Dg-hwQ" id="YKG-OL-Kc7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GE9-Wo-8mV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
