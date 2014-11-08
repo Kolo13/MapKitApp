@@ -16,8 +16,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
   @IBOutlet weak var mapView: MKMapView!
   
   let locationManager = CLLocationManager()
- 
-
+  var localNotifier = UILocalNotification()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -28,9 +27,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     let longPress = UILongPressGestureRecognizer(target: self, action: "didLongPressMap:")
     self.mapView.addGestureRecognizer(longPress)
     
+    
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "reminderAdded:", name: "REMINDER_ADDED", object: nil)
 
-  
+
     switch CLLocationManager.authorizationStatus() as CLAuthorizationStatus {
       
       case .Authorized:
@@ -93,6 +93,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
       let reminderVC = self.storyboard?.instantiateViewControllerWithIdentifier("REMINDER_VC") as AddReminderViewController
       reminderVC.locationManager = self.locationManager
       reminderVC.selectedAnnotation = view.annotation
+      
       self.presentViewController(reminderVC, animated: true, completion: nil)
     }
   
@@ -111,8 +112,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
   
   
     func locationManager(manager: CLLocationManager!, didEnterRegion region: CLRegion!) {
+      self.localNotifier.alertBody = "ENTERING REGION"
+      self.localNotifier.alertAction = "WooHoo"
+      self.localNotifier.fireDate = NSDate()
+      UIApplication.sharedApplication().scheduleLocalNotification(self.localNotifier)
       println("great success!")
-    }
+
+  }
     
     func locationManager(manager: CLLocationManager!, didExitRegion region: CLRegion!) {
       println("left region")
@@ -122,8 +128,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
       println("we got a location update!")
       if let location = locations.last as? CLLocation {
-        
-        
       }
     }
     

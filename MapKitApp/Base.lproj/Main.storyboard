@@ -91,8 +91,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="BJE-IU-0dP">
+                                <rect key="frame" x="16" y="20" width="568" height="257"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="257" id="1fv-Xg-0xb"/>
+                                </constraints>
+                            </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lAg-qT-c3a">
-                                <rect key="frame" x="251" y="285" width="99" height="30"/>
+                                <rect key="frame" x="251" y="476" width="99" height="30"/>
                                 <state key="normal" title="Add Reminder">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -103,10 +109,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="lAg-qT-c3a" secondAttribute="centerX" id="CKf-cc-kY9"/>
-                            <constraint firstAttribute="centerY" secondItem="lAg-qT-c3a" secondAttribute="centerY" id="c0L-6h-RHR"/>
+                            <constraint firstAttribute="centerY" secondItem="lAg-qT-c3a" secondAttribute="centerY" constant="-191" id="RE1-a6-jAa"/>
+                            <constraint firstAttribute="centerX" secondItem="lAg-qT-c3a" secondAttribute="centerX" id="Uac-U2-z8I"/>
+                            <constraint firstAttribute="trailing" secondItem="BJE-IU-0dP" secondAttribute="trailing" constant="16" id="he3-nd-ap6"/>
+                            <constraint firstItem="BJE-IU-0dP" firstAttribute="top" secondItem="nnf-BF-lc4" secondAttribute="bottom" id="s7j-Nb-quJ"/>
+                            <constraint firstItem="BJE-IU-0dP" firstAttribute="leading" secondItem="ESZ-fo-xYy" secondAttribute="leading" constant="16" id="vva-sQ-6cs"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="BJE-IU-0dP" id="Z4z-St-wmq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="miG-0O-C2G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

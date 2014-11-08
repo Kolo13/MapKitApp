@@ -12,6 +12,7 @@ import CoreData
 
 class AddReminderViewController: UIViewController, CLLocationManagerDelegate {
   
+  @IBOutlet weak var mapView: MKMapView!
   var locationManager: CLLocationManager!
   var selectedAnnotation: MKAnnotation!
   var managedObjectContext: NSManagedObjectContext!
@@ -21,18 +22,22 @@ class AddReminderViewController: UIViewController, CLLocationManagerDelegate {
     
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     self.managedObjectContext = appDelegate.managedObjectContext
-    //
+    
     //      let regionSet = self.locationManager.monitoredRegions
     //      let regions = regionSet.allObjects
     //      println(regions.count)
     
+    let location = CLLocationCoordinate2D(latitude: selectedAnnotation.coordinate.latitude , longitude: selectedAnnotation.coordinate.longitude )
+    let span = MKCoordinateSpanMake(0.01, 0.01)
+    let region = MKCoordinateRegion(center: location, span: span)
+    
+    mapView.setRegion(region, animated: true)
   }
   
   @IBAction func didPressAddReminderButton(sender: AnyObject) {
-    var geoRegion = CLCircularRegion(center: selectedAnnotation.coordinate, radius: 40000.0, identifier: "TestRegion")
-    self.locationManager.startMonitoringForRegion(geoRegion)
-    self.dismissViewControllerAnimated(true, completion: nil)
     
+    var geoRegion = CLCircularRegion(center: selectedAnnotation.coordinate, radius: 4000.0, identifier: "TestRegion")
+    self.locationManager.startMonitoringForRegion(geoRegion)
     
     var newReminder = NSEntityDescription.insertNewObjectForEntityForName("Reminder", inManagedObjectContext: self.managedObjectContext) as Reminder
     newReminder.name = geoRegion.identifier
@@ -48,6 +53,7 @@ class AddReminderViewController: UIViewController, CLLocationManagerDelegate {
     NSNotificationCenter.defaultCenter().postNotificationName("REMINDER_ADDED", object: self, userInfo: ["region" : geoRegion])
     
     self.managedObjectContext.save(&error)
+    self.dismissViewControllerAnimated(true, completion: nil)
 
   }
   
